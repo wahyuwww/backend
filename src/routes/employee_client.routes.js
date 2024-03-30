@@ -4,6 +4,7 @@ const { protect } = require("../middlewares/auth");
 const employeeController = require('../controllers/employee_client.controller');
 
 router.get("/", protect, employeeController.findAll);
+router.get("/level", employeeController.findLevel);
 router.post("/", protect, employeeController.create);
 router.get('/:id', employeeController.findById);
 router.put('/:id', employeeController.update);

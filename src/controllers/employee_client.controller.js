@@ -9,6 +9,14 @@ exports.findAll = function (req, res) {
         res.send(employee);
     });
 };
+exports.findLevel = function (req, res) {
+  Employee.findLevel(function (err, employee) {
+    console.log("controller");
+    if (err) res.send(err);
+    console.log("res", employee);
+    res.send(employee);
+  });
+};
 exports.create = function (req, res) {
     const new_employee = new Employee(req.body);
     //handles null error

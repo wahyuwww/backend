@@ -47,6 +47,21 @@ Employee.findAll = function (result) {
       }
     });
 };
+Employee.findLevel = function (result) {
+  dbConn.query(
+    "SELECT employee_id, employee_name, manager_name, path_level, CONCAT(LPAD('', (path_level - 1) * 4, '_'), employee_name) AS path_level FROM tbl_employee_client;",
+    function (err, res) {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+      } else {
+        console.log("tbl_employee : ", res);
+        result(null, res);
+      }
+    }
+  );
+};
+
 Employee.update = function (employe_id, employee, result) {
   dbConn.query(
     "UPDATE tbl_employee_client SET employee_name=?,manager_name=?,path_level=?,path_hierarchy=?,employee_format=? WHERE employe_id = ?",
